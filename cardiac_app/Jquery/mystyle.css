@@ -1,0 +1,169 @@
+.home-buttons-style{
+	height: 50px;
+	width: 150px;
+	/*font-size: large;*/
+}
+
+.btnSearch {
+	position: relative;
+	padding: 5px;
+	cursor: pointer;
+	float: left;
+}
+.hidden
+{
+	display: none;
+}
+
+.select_class
+{
+	width: 50%;
+	float:left;
+}
+
+.image_class
+{
+	float:right;
+	margin-top:11px;
+
+}
+.block_align
+{
+	/*display: inline-block;*/
+}
+.text_class
+{
+	width: 30%;
+	float:left;
+	margin-left: 6px;
+}
+
+.portrait
+{
+	float: right;
+	height:30px;
+	width:30px;
+}
+
+img{
+	max-width: 100%;
+	max-height: 100%;
+	
+}
+
+div.hr {
+	background: #2BAD32  no-repeat scroll center;
+
+	height:.25em;
+}
+
+table, th, td {
+    border: 1px solid black;
+    
+}
+
+td
+{
+	text-align: center;
+	padding-left: 5px;
+    padding-right: 5px;
+}
+th
+{
+	padding-left: 5px;
+    padding-right: 5px;
+	height:50px;
+	/*font-weight:lighter;*/
+}
+.parent_fill
+{
+	height: 100%;
+	width: 100%;
+}
+
+.child_select
+{
+	/*width: 80%;*/
+	height: 100%;
+	margin-top: 5px;
+	
+}
+
+.child_image
+{
+	width: 20%;
+	height: 100%;
+}
+
+.infusion_div
+{
+	widht:90px;
+	float:left;
+}
+
+.active{
+	background-color:rgb(151, 216, 156);
+}
+
+.dropdown dd, .dropdown dt {
+    margin:0px;
+    padding:0px;
+}
+.dropdown ul {
+    margin: -1px 0 0 0;
+}
+.dropdown dd {
+    position:relative;
+}
+.dropdown a, 
+.dropdown a:visited {
+    color:#fff;
+    text-decoration:none;
+    outline:none;
+    /*font-size: 12px;*/
+}
+.dropdown dt a {
+    background-color:#4F6877;
+    display:block;
+    padding: 8px 20px 5px 10px;
+    min-height: 25px;
+    line-height: 24px;
+    overflow: hidden;
+    border:0;
+    width:272px;
+}
+.dropdown dt a span, .multiSel span {
+    cursor:pointer;
+    display:inline-block;
+    padding: 0 3px 2px 0;
+}
+.dropdown dd ul {
+    background-color: #4F6877;
+    border:0;
+    color:#fff;
+    display:none;
+    left:0px;
+    padding: 2px 15px 2px 5px;
+    position:absolute;
+    top:2px;
+    width:280px;
+    list-style:none;
+    height: 100px;
+    overflow: auto;
+}
+.dropdown span.value {
+    display:none;
+}
+.dropdown dd ul li a {
+    padding:5px;
+    display:block;
+}
+.dropdown dd ul li a:hover {
+    background-color:#fff;
+}
+.jqxWidget
+{
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: medium;
+}

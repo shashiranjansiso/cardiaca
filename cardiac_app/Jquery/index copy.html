@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="jquery.timer.js"></script>
+<script src="model.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+         <h1>SBUCA</h1>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
+      </div>
+          
+    <div>
+      <div data-role="controlgroup" data-type="vertical">
+          <a class="ui-btn ui-btn-b" href="#newpatient" onclick="loadXMLDoc()">New Patient</a>
+          <a href="#existingpatient" class="ui-btn ui-btn-b" >Existing Patient</a>
+          <a href="#" class="ui-btn ui-btn-b">Settings</a>
+          <a href="#" class="ui-btn ui-btn-b">Help</a>
+       </div>
+    </div> 
+</div>
+<!--new patient page -->
+<div data-role="page" id="newpatient">
+  <div data-role="header">
+    <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+         <h1>New Patient</h1>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
+  </div>
+
+  <div data-role="main" class="ui-content">
+   <!-- <form method="post" action="demoform.asp"> -->
+      <div class="ui-field-contain">
+        <label for="name">Name:</label>
+        <input type="text" name="fullname" id="fullname">       
+        <label for="bday">Date of Birth:</label>
+        <input type="date" name="bday" id="bday">
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender"> 
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age">    
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" placeholder="Your email..">
+      </div>
+      <input type="submit" data-inline="true" value="Submit" onclick="createRequest()">
+      <!--<button href="#cardiac_data" style="width:10%;">Submit</button-->
+   <!-- </form>  -->
+  </div>
+</div> 
+<!--Existing patient page -->
+<div data-role="page" id="existingpatient">
+  <div data-role="header">
+    <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+         <h1>Existing Patient</h1>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
+  </div>
+   
+   <div class="ui-toolbar ui-widget-header ui-helper-clearfix" style="padding:5px;">
+          <span style="position: absolute;" class="btnSearch ui-state-default" title="search">
+            <span class="ui-icon ui-icon-search"></span>
+          </span>
+          <input type="text" id="patient_search" placeholder="Enter email id..." style="float: left;">
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left" onclick="getPatientInformation()">Search</a>
+    </div>
+
+  <div data-role="main" class="ui-content">
+    <form method="post" action="demoform.asp">
+      <div class="ui-field-contain">
+        <label for="name">Name:</label>
+        <input type="text" name="fullname" id="fullname">       
+        <label for="bday">Date of Birth:</label>
+        <input type="date" name="bday" id="bday">
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender"> 
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age">    
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" placeholder="Your email..">
+      </div>
+      <input type="submit" data-inline="true" value="Submit">
+    </form>
+  </div>
+</div> 
+
+<!--cardiac data page -->
+<div data-role="page" id="cardiac_data">
+  <div data-role="header">
+    <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+         <h1>New Patient</h1>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
+  </div>
+
+  <div>
+      <div data-role="controlgroup" id="cardiac_data_row" data-type="vertical">
+        <table id="mytable" class="ui-widget">
+          <thead class="ui-widget-header">
+            <tr>
+              <th>Time</th>
+              <th>CPR</th>
+              <th>Rhythm</th>
+              <th>Pulse check</th>
+              <th>Monitoring</th>
+              <th>Intervention</th>
+              <th>EPINOPHRINE</th>
+              <th>Bolus</th>
+              <th>Infusion</th>
+            </tr>
+          </thead>
+        <tbody class="ui-widget-content" id="table_body">
+        <tr class="ca_row" id="ca_row1">
+           <td>
+             <label for="time" id="time">0:1</label>
+           </td>
+            <td style="width:12%;">
+              
+              <select name="cpr" id="speed">
+                <option selected="selected">Select</option>
+              <option>Manual</option>
+              <option>Mechanical</option>
+              <option>Pulse present</option>
+          </select>
+            </td>
+            
+           
+            <td style="width:12%;">
+            <input type="checkbox" id="check1"><label for="check1"></label>
+          </td>
+
+          <td style="width:12%;" id = "plus_td">
+                <select name="Pulse" id="Pulse" style="float:left;" >
+                  <option selected="selected">Select</option>
+                  <option >Pea</option>
+                  <option>Asystole</option>
+                  <option>Vtach/Vfib</option>
+                  <option>Bradycardia</option>
+                  <option>Normal Synus</option>
+              </select>
+              
+              <div class="portrait" id = "add_new" onclick="onclick_handler(this);">
+                <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png">
+              </div>
+              <!--<div style="background-image: url('/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png')">
+              </div>-->
+            </td>
+             <td style="width:12%;">
+                <select name="Monitoring" id="Monitoring" onc>
+                  <option selected="selected">Select</option>
+                  <option>Bedside us</option>
+                  <option>Brain Ox</option>
+                  <option>Waves etc02</option>
+                  <option>Artlines map</option>
+                  <option>Normal Synus</option>
+              </select>
+            </td>
+            <td style="width:12%;">
+                <select name="Intervention" id="Intervention" >
+                  <option selected="selected">Select</option>
+                  <option>Defrib</option>
+                  <option>Airway</option>
+                  <option>C Line Placed</option>
+                  <option>IO Line placed</option>
+                  <option>ResQ Pod</option>
+                  <option>Transvenous PM</option>
+              </select>
+            </td>
+            <td style="width:5%;"  >
+                <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
+            </td>
+            <td>
+                <select name="Bolus" id="Bolus" >
+                  <option selected="selected">Select</option>
+                  <option>Atropine</option>
+                  <option>AMiodarone</option>
+                  <option>Magnesium</option>
+                  <option>D50W</option>
+                  <option>D10W</option>
+                  <option>SOdium bi card</option>
+                  <option>Lidocaine</option>
+                  <option>Vasopressin</option>
+                  <option>IV Fluids</option>
+                  <option>Other Therapy</option>
+              </select>
+            </td>
+            <td>
+                <input type="text" name="Infusion" id="Infusion"> 
+            </td>
+        </tr>
+        <tr class="ca_row" id="ca_row1">
+           <td>
+             <label for="time" id="time">0:2</label>
+           </td>
+            <td style="width:12%;">
+              
+              <select name="cpr" id="speed">
+                <option selected="selected">Select</option>
+              <option>Manual</option>
+              <option>Mechanical</option>
+              <option>Pulse present</option>
+          </select>
+            </td>
+            
+           
+            <td style="width:12%;">
+            <input type="checkbox" id="check1"><label for="check1"></label>
+          </td>
+
+          <td style="width:12%;" id = "plus_td">
+                <select name="Pulse" id="Pulse" style="float:left;" >
+                  <option selected="selected">Select</option>
+                  <option >Pea</option>
+                  <option>Asystole</option>
+                  <option>Vtach/Vfib</option>
+                  <option>Bradycardia</option>
+                  <option>Normal Synus</option>
+              </select>
+              <div class="portrait" id = "add_new" onclick="onclick_handler(this);">
+                <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png">
+              </div>
+              <!--<div style="background-image: url('/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png')">
+              </div>-->
+            </td>
+             <td style="width:12%;">
+                <select name="Monitoring" id="Monitoring" >
+                  <option selected="selected">Select</option>
+                  <option>Bedside us</option>
+                  <option>Brain Ox</option>
+                  <option>Waves etc02</option>
+                  <option>Artlines map</option>
+                  <option>Normal Synus</option>
+              </select>
+            </td>
+            <td style="width:12%;">
+                <select name="Intervention" id="Intervention" >
+                  <option selected="selected">Select</option>
+                  <option>Defrib</option>
+                  <option>Airway</option>
+                  <option>C Line Placed</option>
+                  <option>IO Line placed</option>
+                  <option>ResQ Pod</option>
+                  <option>Transvenous PM</option>
+              </select>
+            </td>
+            <td style="width:5%;"  >
+                <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
+            </td>
+            <td>
+                <select name="Bolus" id="Bolus" >
+                  <option selected="selected">Select</option>
+                  <option>Atropine</option>
+                  <option>AMiodarone</option>
+                  <option>Magnesium</option>
+                  <option>D50W</option>
+                  <option>D10W</option>
+                  <option>SOdium bi card</option>
+                  <option>Lidocaine</option>
+                  <option>Vasopressin</option>
+                  <option>IV Fluids</option>
+                  <option>Other Therapy</option>
+              </select>
+            </td>
+            <td>
+                <input type="text" name="Infusion" id="Infusion"> 
+            </td>
+        </tr>
+        <tr class="ca_row" id="ca_row1">
+           <td>
+             <label for="time" id="time">0:3</label>
+           </td>
+            <td style="width:12%;">
+              
+              <select name="cpr" id="speed">
+                <option selected="selected">Select</option>
+              <option>Manual</option>
+              <option>Mechanical</option>
+              <option>Pulse present</option>
+          </select>
+            </td>
+            
+           
+            <td style="width:12%;">
+            <input type="checkbox" id="check1"><label for="check1"></label>
+          </td>
+
+          <td style="width:12%;" id = "plus_td">
+                <select name="Pulse" id="Pulse" style="float:left;" >
+                  <option selected="selected">Select</option>
+                  <option >Pea</option>
+                  <option>Asystole</option>
+                  <option>Vtach/Vfib</option>
+                  <option>Bradycardia</option>
+                  <option>Normal Synus</option>
+              </select>
+              <div class="portrait" id = "add_new" onclick="onclick_handler(this);">
+                <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png">
+              </div>
+              <!--<div style="background-image: url('/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png')">
+              </div>-->
+            </td>
+             <td style="width:12%;">
+                <select name="Monitoring" id="Monitoring" >
+                  <option selected="selected">Select</option>
+                  <option>Bedside us</option>
+                  <option>Brain Ox</option>
+                  <option>Waves etc02</option>
+                  <option>Artlines map</option>
+                  <option>Normal Synus</option>
+              </select>
+            </td>
+            <td style="width:12%;">
+                <select name="Intervention" id="Intervention" >
+                  <option selected="selected">Select</option>
+                  <option>Defrib</option>
+                  <option>Airway</option>
+                  <option>C Line Placed</option>
+                  <option>IO Line placed</option>
+                  <option>ResQ Pod</option>
+                  <option>Transvenous PM</option>
+              </select>
+            </td>
+            <td style="width:5%;"  >
+                <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
+            </td>
+            <td>
+                <select name="Bolus" id="Bolus" >
+                  <option selected="selected">Select</option>
+                  <option>Atropine</option>
+                  <option>AMiodarone</option>
+                  <option>Magnesium</option>
+                  <option>D50W</option>
+                  <option>D10W</option>
+                  <option>SOdium bi card</option>
+                  <option>Lidocaine</option>
+                  <option>Vasopressin</option>
+                  <option>IV Fluids</option>
+                  <option>Other Therapy</option>
+              </select>
+            </td>
+            <td>
+                <input type="text" name="Infusion" id="Infusion"> 
+            </td>
+        </tr>
+       <tr class="ca_row hidden" id="ca_row_hidden">
+           <td>
+             <label for="time" id="time"></label>
+           </td>
+            <td style="width:12%;">
+              
+              <select name="cpr" id="speed">
+                <option selected="selected">Select</option>
+              <option>Manual</option>
+              <option>Mechanical</option>
+              <option>Pulse present</option>
+          </select>
+            </td>
+            
+           
+            <td style="width:12%;">
+            <input type="checkbox" id="check1"><label for="check1"></label>
+          </td>
+
+          <td style="width:12%;" id = "plus_td">
+                <select name="Pulse" id="Pulse" style="float:left;" >
+                  <option selected="selected">Select</option>
+                  <option >Pea</option>
+                  <option>Asystole</option>
+                  <option>Vtach/Vfib</option>
+                  <option>Bradycardia</option>
+                  <option>Normal Synus</option>
+              </select>
+              <div class="portrait" id ="add_new" onclick="onclick_handler(this);">
+                <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png">
+              </div>
+              <!--<div style="background-image: url('/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png')">
+              </div>-->
+            </td>
+             <td style="width:12%;">
+                <select name="Monitoring" id="Monitoring" >
+                  <option selected="selected">Select</option>
+                  <option>Bedside us</option>
+                  <option>Brain Ox</option>
+                  <option>Waves etc02</option>
+                  <option>Artlines map</option>
+                  <option>Normal Synus</option>
+              </select>
+            </td>
+            <td style="width:12%;">
+                <select name="Intervention" id="Intervention" >
+                  <option selected="selected">Select</option>
+                  <option>Defrib</option>
+                  <option>Airway</option>
+                  <option>C Line Placed</option>
+                  <option>IO Line placed</option>
+                  <option>ResQ Pod</option>
+                  <option>Transvenous PM</option>
+              </select>
+            </td>
+            <td style="width:5%;"  >
+                <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
+            </td>
+            <td>
+                <select name="Bolus" id="Bolus" >
+                  <option selected="selected">Select</option>
+                  <option>Atropine</option>
+                  <option>AMiodarone</option>
+                  <option>Magnesium</option>
+                  <option>D50W</option>
+                  <option>D10W</option>
+                  <option>SOdium bi card</option>
+                  <option>Lidocaine</option>
+                  <option>Vasopressin</option>
+                  <option>IV Fluids</option>
+                  <option>Other Therapy</option>
+              </select>
+            </td>
+            <td>
+                <input type="text" name="Infusion" id="Infusion"> 
+            </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+      <label for="cpr" id="cpr" >CPR: 0</label>
+  </div> 
+</div> 
+<script>
+$( "select" )
+  .change(function () {
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      str += $( this ).text() + " ";
+
+      alert(str);
+    });
+    //$( "div" ).text( str );
+  })
+  .change();
+</script>
+</body>
+</html>
