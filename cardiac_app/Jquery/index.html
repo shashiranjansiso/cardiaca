@@ -284,7 +284,7 @@
         </tbody>
        </table> 
 
-      <div data-role="controlgroup" id="cardiac_data_row" data-type="vertical" style="height:350px; overflow-y:scroll; margin-top:-1px;" class="table-container">
+      <div data-role="controlgroup" id="cardiac_data_row" data-type="vertical" style="height:370px; overflow-y:scroll; margin-top:-1px;" class="table-container">
          
         <table id="mytable" class="ui-widget" cellpadding="0" cellspacing="0" style="margin-left:1%; margin-right:1%;">
           <!--<thead class="ui-widget-header">
@@ -306,14 +306,16 @@
            <td>
              <label for="time" id="time">1:00</label>
            </td>
+           
             <td  >
-              
-              <select name="cpr" id="speed">
-                <option selected="selected">Select</option>
-              <option>Manual</option>
-              <option>Mechanical</option>
-              <option>None</option>
-          </select>
+              <div style="width:112px;">
+                <select name="cpr" id="speed" onchange="handle_select_change(this);">
+                    <option selected="selected">Select</option>
+                    <option>Manual</option>
+                    <option>Mechanical</option>
+                    <option>None</option>
+                </select>
+             </div>
             </td>
             
            
@@ -322,7 +324,7 @@
           </td>
 
           <td id = "plus_td">
-            <div class="parent_fill">
+            <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
                   <select name="Rhythm" id="Rhythm" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
@@ -342,7 +344,7 @@
              <td  style="width:20%;">
               <div class="parent_fill">
                 <div class="child_select block_align select_class">  
-                <select name="Monitoring" id="Monitoring">
+                <select name="Monitoring" id="Monitoring" onchange="handle_select_change(this);">
                   <option selected="selected">Select</option>
                   <option>Bedside US</option>
                   <option>Brain Ox</option>
@@ -360,8 +362,8 @@
 
             </div>
             </td>
-            <td>
-              <div class="parent_fill">
+            <td style="width:20.6%;">
+              <div class="parent_fill" style="float:left;ss">
                 <div class="child_select block_align select_class" style="width:40%;"> 
                 <select name="Intervention" id="Intervention" onchange="handle_select_change(this);">
                   <option selected="selected" >Select</option>
@@ -377,12 +379,12 @@
                 <input type="text"  name="temp" id="temp">           
               </div>
                 <div class="text_class hidden" id="airway_select" style="width:40%;">
-                            <select name="Bolus" id="Bolus" >
-                              <option selected="selected">BVM</option>
-                              <option>ETT</option>
-                              <option>LMA</option>
-                              <option>Others</option>
-                            </select>
+                    <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
+                      <option selected="selected">BVM</option>
+                      <option>ETT</option>
+                      <option>LMA</option>
+                      <option>Others</option>
+                    </select>
               </div>
               <div class="portrait image_class" id = "add_new_intervention" onclick="onclick_handler(this);">
                 <img src="plus.png">
@@ -395,7 +397,7 @@
             <td>
             <div class="parent_fill">
               <div class="child_select block_align select_class" style="width:65%;">
-                  <select name="Bolus" id="Bolus" >
+                  <select name="Bolus" id="Bolus" onchange="handle_select_change(this);"
                     <option selected="selected">Select</option>
                     <option>Atropine</option>
                     <option>Amiodarone</option>
@@ -468,14 +470,16 @@
            <td>
              <label for="time" id="time">2:00</label>
            </td>
+
             <td   >
-              
-              <select name="cpr" id="speed">
-                <option selected="selected">Select</option>
-              <option>Manual</option>
-              <option>Mechanical</option>
-              <option>None</option>
-          </select>
+              <div style="width:112px;">   
+                <select name="cpr" id="speed" onchange="handle_select_change(this);">
+                  <option selected="selected">Select</option>
+                  <option>Manual</option>
+                  <option>Mechanical</option>
+                  <option>None</option>
+               </select>
+              </div>
             </td>
             
            
@@ -484,7 +488,7 @@
           </td>
 
           <td id = "plus_td">
-            <div class="parent_fill">
+            <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
                   <select name="Rhythm" id="Rhythm" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
@@ -504,7 +508,7 @@
              <td  style="width:20%;">
               <div class="parent_fill">
                 <div class="child_select block_align select_class">  
-                <select name="Monitoring" id="Monitoring">
+                <select name="Monitoring" id="Monitoring" onchange="handle_select_change(this);">
                   <option selected="selected">Select</option>
                   <option>Bedside US</option>
                   <option>Brain Ox</option>
@@ -522,8 +526,8 @@
 
             </div>
             </td>
-            <td>
-              <div class="parent_fill">
+            <td style="width:20.6%;">
+              <div class="parent_fill" style="float:left;">
                 <div class="child_select block_align select_class" style="width:40%;"> 
                 <select name="Intervention" id="Intervention" onchange="handle_select_change(this);">
                   <option selected="selected" >Select</option>
@@ -539,12 +543,12 @@
                 <input type="text"  name="temp" id="temp">           
               </div>
                 <div class="text_class hidden" id="airway_select" style="width:40%;">
-                            <select name="Bolus" id="Bolus" >
-                              <option selected="selected">BVM</option>
-                              <option>ETT</option>
-                              <option>LMA</option>
-                              <option>Others</option>
-                            </select>
+                    <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
+                      <option selected="selected">BVM</option>
+                      <option>ETT</option>
+                      <option>LMA</option>
+                      <option>Others</option>
+                    </select>
               </div>
               <div class="portrait image_class" id = "add_new_intervention" onclick="onclick_handler(this);">
                 <img src="plus.png">
@@ -557,7 +561,7 @@
             <td>
               <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">
-                  <select name="Bolus" id="Bolus" >
+                  <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
                     <option>Atropine</option>
                     <option>Amiodarone</option>
@@ -628,14 +632,16 @@
            <td>
              <label for="time" id="time">3:00</label>
            </td>
-            <td   >
-              
-              <select name="cpr" id="speed">
+            
+            <td>
+              <div style="width:112px;">
+              <select name="cpr" id="speed" onchange="handle_select_change(this);">
                 <option selected="selected">Select</option>
-              <option>Manual</option>
-              <option>Mechanical</option>
-              <option>None</option>
-          </select>
+                <option>Manual</option>
+                <option>Mechanical</option>
+                <option>None</option>
+                </select>
+              </div>
             </td>
             
            
@@ -644,7 +650,7 @@
           </td>
 
           <td id = "plus_td">
-            <div class="parent_fill">
+            <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
                   <select name="Rhythm" id="Rhythm" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
@@ -664,7 +670,7 @@
              <td  style="width:20%;">
               <div class="parent_fill">
                 <div class="child_select block_align select_class">  
-                <select name="Monitoring" id="Monitoring" onc>
+                <select name="Monitoring" id="Monitoring" onchange="handle_select_change(this);">
                   <option selected="selected">Select</option>
                   <option>Bedside US</option>
                   <option>Brain Ox</option>
@@ -683,8 +689,8 @@
 
             </div>
             </td>
-            <td>
-              <div class="parent_fill">
+            <td style="width:20.6%;">
+              <div class="parent_fill" style="float:left;">
                 <div class="child_select block_align select_class" style="width:40%;"> 
                 <select name="Intervention" id="Intervention" onchange="handle_select_change(this);">
                   <option selected="selected" >Select</option>
@@ -700,12 +706,12 @@
                 <input type="text"  name="temp" id="temp">           
               </div>
                 <div class="text_class hidden" id="airway_select" style="width:40%;">
-                            <select name="Bolus" id="Bolus" >
-                              <option selected="selected">BVM</option>
-                              <option>ETT</option>
-                              <option>LMA</option>
-                              <option>Others</option>
-                            </select>
+                    <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
+                      <option selected="selected">BVM</option>
+                      <option>ETT</option>
+                      <option>LMA</option>
+                      <option>Others</option>
+                    </select>
               </div>
               <div class="portrait image_class" id = "add_new_intervention" onclick="onclick_handler(this);">
                 <img src="plus.png">
@@ -718,7 +724,7 @@
             <td>
                <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">
-                  <select name="Bolus" id="Bolus" >
+                  <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
                     <option>Atropine</option>
                     <option>Amiodarone</option>
@@ -790,12 +796,14 @@
            </td>
             
             <td>
-              <select name="cpr" id="speed">
-                <option selected="selected">Select</option>
-              <option>Manual</option>
-              <option>Mechanical</option>
-              <option>None</option>
-          </select>
+              <div style="width:112px;">
+                <select name="cpr" id="speed" onchange="handle_select_change(this);">
+                  <option selected="selected">Select</option>
+                  <option>Manual</option>
+                  <option>Mechanical</option>
+                  <option>None</option>
+                </select>
+              </div>
             </td>
             
             <td  style="width:3%;">
@@ -804,7 +812,7 @@
 
       
          <td id ="plus_td">
-            <div class="parent_fill">
+            <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
                   <select name="Rhythm" id="Rhythm" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
@@ -843,8 +851,8 @@
 
             </div>
             </td>
-            <td>
-              <div class="parent_fill">
+            <td style="width:20.6%;">
+              <div class="parent_fill" style="float:left;">
                 <div class="child_select block_align select_class" style="width:40%;"> 
                 <select name="Intervention" id="Intervention" onchange="handle_select_change(this);">
                   <option selected="selected" >Select</option>
@@ -860,12 +868,12 @@
                 <input type="text"  name="temp" id="temp">           
               </div>
                 <div class="text_class hidden" id="airway_select" style="width:40%;">
-                            <select name="Bolus" id="Bolus" >
-                              <option selected="selected">BVM</option>
-                              <option>ETT</option>
-                              <option>LMA</option>
-                              <option>Others</option>
-                            </select>
+                  <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
+                      <option selected="selected">BVM</option>
+                      <option>ETT</option>
+                      <option>LMA</option>
+                      <option>Others</option>
+                  </select>
               </div>
               <div class="portrait image_class" id = "add_new_intervention" onclick="onclick_handler(this);">
                 <img src="plus.png">
@@ -879,7 +887,7 @@
             <td>
                <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">
-                  <select name="Bolus" id="Bolus" >
+                  <select name="Bolus" id="Bolus" onchange="handle_select_change(this);">
                     <option selected="selected">Select</option>
                     <option>Atropine</option>
                     <option>Amiodarone</option>
@@ -904,43 +912,6 @@
                     <div style='float: left;' class="jqxWidget">
                     </div>
                 </div>
-                <!--<input type="text" name="Infusion" id="Infusion"--> 
-                <!--div style="overflow-x:scroll; overflow-y:hidden; width:170px; margin-right:-50px;">
-                  
-                  <div style="width:1000px;">
-                     <div class="infusion_div">
-                        <button onclick="toggle_handler(this);">Norepinephrine</button>
-                      </div>
-                 
-                       <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">Magnesium</button>
-                       </div>
-
-                        <div class="infusion_div" >
-                         <button onclick="toggle_handler(this);">Amiodarone</button>
-                       </div>
-                       
-                      <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">Atropine</button>
-                       </div>
-                      
-                      <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">D50W</button>
-                       </div>
-                      
-                       <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">D10W</button>
-                       </div>
-                       
-                       <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">Sodium Bicarb</button>
-                       </div>
-                       
-                       <div class="infusion_div">
-                         <button onclick="toggle_handler(this);">Lido</button>
-                       </div>
-                  </div>
-               </div-->
             </td>
         </tr>
       </tbody>
