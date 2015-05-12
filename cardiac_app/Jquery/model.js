@@ -179,15 +179,14 @@ function startTimer()
         sec++;
         //hightlight eh current row
         var table = document.getElementById("mytable");
-        if(count%3 == 0)  //1 min
+        if(count%60 == 0)  //1 min
         {
           min++;
           flag = true;
           sec = 0;
          
         }
-        if(min > 6)
-          return;
+    
         document.getElementById("cpr").innerHTML = 'CPR:' + min + ":" + count%60;
         document.getElementById("epi").innerHTML = 'EPI:' + min + ":" + count%60;
         document.getElementById("code").innerHTML = 'CODE:' + min + ":" + count%60;
@@ -499,7 +498,7 @@ function load_jqxdropdown(){
 
       // Create a jqxDropDownList
       $(".jqxWidget").jqxDropDownList({ checkboxes: true, source: dataAdapter, displayMember: "medName", valueMember: "value", width: 170, height: 40});
-      //$(".jqxWidget").jqxDropDownList('checkIndex', 0);
+      $(".jqxWidget").jqxDropDownList('checkIndex', 0);
       
       // subscribe to the checkChange event.
     
