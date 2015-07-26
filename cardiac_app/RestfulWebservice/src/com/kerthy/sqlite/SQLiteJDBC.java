@@ -6,12 +6,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import me.kerthy.service.SimpleRestService;
+
+import org.apache.log4j.Logger;
+
+import com.kerthy.parser.CardiacData;
 import com.kerthy.parser.Parser;
 import com.kerthy.parser.Patient;
 
 public class SQLiteJDBC
 {
-	private static String dbfile = "/Users/shashi/Desktop/workspace/RestfulWebservice/database/test.db";
+	private static String dbfile = "/home/harsha/Dropbox/Summer15/cardiaca/cardiac_app/RestfulWebservice/database/test.db";
+	private static final Logger logger = Logger.getLogger(SQLiteJDBC.class);
+
  /* public static void main( String args[] )
   {
 	 //deleteExistingFile(dbfile);
@@ -56,6 +63,23 @@ public class SQLiteJDBC
 	                   " EMAIL         CHAR(50))"; 
 	      stmt.executeUpdate(sql);
 	      stmt.close();
+	      
+	      stmt = c.createStatement();
+	      String sqlCardiac="CREATE TABLE CardiacData"+
+	    		  			"(PATIENTID VARCHAR(20),"+
+							"TIME VARCHAR(4),"+
+							"CPR VARCHAR(20),"+
+							"CPR_TIMESTAMP VARCHAR(20),"+
+							"RHYTHM VARCHAR(20),"+
+							"MONITORING_KEY VARCHAR(20),"+
+							"MONITORING_VALUE VARCHAR(20),"+
+							"INTERVENTION_KEY VARCHAR(20),"+
+							"INTERVENTION_VALUE VARCHAR(20),"+
+							"BOLUS VARCHAR(20),"+
+							"INFUSION VARCHAR(255))";
+	      stmt.executeUpdate(sqlCardiac);
+	      stmt.close();
+	      System.out.println(sql+" "+sqlCardiac+" created successfully");
 	      c.close();
 	    } 
 	    catch ( Exception e ) {
@@ -83,6 +107,41 @@ public class SQLiteJDBC
 	                   //+ "'shashi','2011-03-12' , 'male', 22, 'shashiranjansiso@gmail.com' );"; 
 	      stmt.executeUpdate(sql);
 
+	      stmt.close();
+	      c.commit();
+	      c.close();
+	    } catch ( Exception e ) {
+	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	      System.exit(0);
+	    }
+	    System.out.println("Records created successfully");
+  }
+  
+  
+  public void insertInTable(CardiacData[] data)
+  {
+	  Connection c = null;
+	  
+	    Statement stmt = null;
+	    try {
+	      Class.forName("org.sqlite.JDBC");
+	      c = DriverManager.getConnection("jdbc:sqlite:" + dbfile);
+	      c.setAutoCommit(false);
+	      System.out.println("Opened database successfully");
+	      stmt = c.createStatement();
+	      for(CardiacData dataRow:data){
+	      String sql = "INSERT INTO CARDIACDATA " +
+	                   "VALUES ("
+	                   + "'MRN12345',"+dataRow.toString() + ");";
+	                   //+ "'shashi','2011-03-12' , 'male', 22, 'shashiranjansiso@gmail.com' );"; 
+	      if (logger.isDebugEnabled()) {
+	    	  System.out.println(sql);
+				logger.debug("INSERT STATEMENT: '" + sql + "'");
+				logger.debug("End insertStatement");
+			}
+	      stmt.executeUpdate(sql);
+	     
+	      }
 	      stmt.close();
 	      c.commit();
 	      c.close();

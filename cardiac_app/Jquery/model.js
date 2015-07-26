@@ -25,15 +25,21 @@ function createRequest(flag_v)
   if(flag_v == true)
   {
       var myObj = {};
+      /*
       myObj["Name"] = document.getElementById("fullname").value;
       myObj["Dob"] = document.getElementById("bday").value;
       myObj["Gender"] = document.getElementById("gender").value;
       myObj["Age"] = document.getElementById("age").value;
       myObj["Email"] = document.getElementById("email").value;
-      var request = "request=new_patient";
-      var json = request.concat(JSON.stringify(myObj));
+*/
+      var patient={};
+      patient['lastname']=document.getElementById('lastname').value;
+      patient['mrn']=document.getElementById('mrn').value;
+      var request = "info=patient&request=";
+      var json = request.concat(JSON.stringify(patient));
       $.post("http://localhost:8080/RestfulWebservice/rs/service/postSomething",
             json);
+      sessionStorage.setItem("patientId","MRN12457896");
     //alert(json);
     //send_code_data_to_server();
   }
@@ -42,78 +48,72 @@ function createRequest(flag_v)
   window.location = "index.html#cardiac_data";
 }
 
-function send_code_data_to_server()
+function send_cardiac_data()
 {
-    var patient_data = {};
-    /*patient_data["time"] = document.getElementById("fullname").value;
-    patient_data["cpr"] = document.getElementById("bday").value;
-    patient_data["cpr_timestamp"] = document.getElementById("gender").value;
-    patient_data["pulseCheck"] = document.getElementById("age").value;
-    patient_data["rhythm"] = document.getElementById("email").value;
-    patient_data["monitoring_key"] = document.getElementById("email").value;
-    patient_data["monitoring_value"] = document.getElementById("email").value;
-    patient_data["Intervention_key"] = document.getElementById("email").value;
-    patient_data["Intervention_value"] = document.getElementById("email").value;
-    patient_data["epinephrine"] = document.getElementById("email").value;
-    patient_data["bolus"] = document.getElementById("email").value;
-    patient_data["infusion"] = document.getElementById("email").value;*/
+    var mrn=sessionStorage.getItem("patientId"); 
+    var cardiacData=[];
 
-    var table_body = document.getElementById('table_body');
-    var no_of_rows = table_body.childElementCount -1;
+    var _table = document.getElementById('mytable');
+    var t_body = _table.children[0];
+    //var t_body_row = t_body.innerHTML;
+
+    var no_of_rows = t_body.childElementCount -1;
     var i;
     for(i = 0; i <no_of_rows; i++)
     {
+        var patient_data = {};
         //fetch data for each row and send to server
-        var tr = table_body.children[i];
+        var tr = t_body.children[i];
         var time_td = tr.children[0];
         var time = time_td.children[0].innerHTML;
         patient_data["time"] = time;
         var cpr_td = tr.children[1];
-        var cpr = cpr_td.children[0].children[0].children[1].value;
+        var cpr = cpr_td.children[0].children[0].children[0].children[1].value;
         patient_data["cpr"] = cpr;
         //var cpr_td = tr.children[2];
         //var cpr = cpr_td.children[0].value;
         patient_data["cpr_timestamp"] = "abc";
 
-        var pulsecheck_td = tr.children[2];
+       /* var pulsecheck_td = tr.children[2];
         var pulsecheck = pulsecheck_td.children[0].children[0].value;
         if(pulsecheck == 'on')
           patient_data["pulseCheck"] = "TRUE";
         else
           patient_data["pulseCheck"] = "FALSE";
-
-        var rhythm_td = tr.children[3];
+        */
+        var rhythm_td = tr.children[2];
         var rhythm = rhythm_td.children[0].children[0].children[0].children[0].children[1].value;
         patient_data["rhythm"] = rhythm;
 
-        var monitoring_td = tr.children[4];
+        var monitoring_td = tr.children[3];
         var monitoring_key = monitoring_td.children[0].children[0].children[0].children[0].children[1].value;
         patient_data["monitoring_key"] = monitoring_key;
         
         var monitoring_value = monitoring_td.children[0].children[1].children[0].children[0].innerHTML;
         patient_data["monitoring_value"] = monitoring_value;
 
-        var intervention_td = tr.children[5];
+        var intervention_td = tr.children[4];
         var intervention_key = intervention_td.children[0].children[0].children[0].children[0].children[1].value;
         patient_data["intervention_key"] = intervention_key;
 
         //var intervention_value = intervention_td.children[0].children[1].children[0].children[0].innerHTML;
         patient_data["intervention_value"] = "abc";
-
+/*
         var epinephrine_td = tr.children[6];
         var epinephrine = epinephrine_td.children[0].children[0].innerHTML;
         patient_data["epinephrine"] = epinephrine;
-
-        var bolus_td = tr.children[7];
+*/
+        var bolus_td = tr.children[5];
         var bolus = bolus_td.children[0].children[0].children[0].children[0].children[1].value;
         patient_data["bolus"] = bolus;
 
-        var infusion_td = tr.children[8];
-        var infusion_count = infusion_td.children[0].children[0].childElementCount;
-        var infusion_data;
-        var infusion = "";
-        var j;
-        for(j = 0; j <infusion_count; j++)
+        var infusion_td = tr.children[6];
+        //var infusion_count = infusion_td.children[0].children[0].childElementCount;
+       // var infusion_data;
+       // var infusion = "";
+        //var j;
+        var infusion=infusion_td.children[0].children[0].children[0].children[0].children[0].children[0].textContent;
+       /* for(j = 0; j <infusion_count; j++)
         {
             infusion_data = infusion_td.children[0].children[0].children[j];
             var c = infusion_data.children[0].className;
@@ -123,15 +123,14 @@ function send_code_data_to_server()
               //add active class to node
               infusion = infusion + infusion_data.children[0].innerHTML;
             }
-        }
+        }*/
         patient_data["infusion"] = infusion;
-
-        var request = "request=code_data";
-        var json = request.concat(JSON.stringify(patient_data));
-        $.post("http://localhost:8080/RestfulWebservice/rs/service/postSomething",
-              json);
+        cardiacData.push(patient_data);
     }
-   
+    var request = "info=code_data&request=";
+    var json = request.concat(JSON.stringify(cardiacData));
+    $.post("http://localhost:8080/RestfulWebservice/rs/service/postSomething",
+              json);
     //alert(json);
   }
 
@@ -286,7 +285,7 @@ function onclick_handler(el)
        var elements = document.getElementById("ca_row_hidden");
        if(monitoring_node == 0)
         { 
-           monitoring_node = elements.children[4];  //monitoring
+           monitoring_node = elements.children[3];  //monitoring
         //alert(el.parentElement.parentElement.innerHTML);
           //el.parentElement.parentElement.parentElement.innerHTML = el.parentElement.parentElement.parentElement.innerHTML + '<div class="parent_fill"> <div class="child_select block_align"> <select name="Pulse" id="Pulse" > <option selected="selected">Select</option> <option >Pea</option> <option>Asystole</option></select></div> <div class="portrait" id = "add_new" onclick="onclick_handler(this);" <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png"> </div>';
         //str = el.parentElement.parentElement.innerHTML + str;
@@ -308,7 +307,7 @@ function onclick_handler(el)
           var elements = document.getElementById("ca_row_hidden");
            if(intervention_node == 0)
             { 
-               intervention_node = elements.children[5];  //monitoring
+               intervention_node = elements.children[4];  //intervention
                 var n = intervention_node.children[0];
             }
             c_id++;

@@ -6,6 +6,10 @@ public class Patient {
 	private String Gender;
 	private int Age;
 	private String Email;
+	
+	private String lastname;
+	private String mrn;
+	
 	public String getName() {
 		return Name;
 	}
@@ -39,10 +43,24 @@ public class Patient {
 	
 	public String toString()
 	{
-		String str = "'" + this.Name + "', '" + this.Dob.toString() + "', '" + this.Gender + "', " + this.Age + ", '" + this.Email + "'";
+		//String str = "'" + this.Name + "', '" + this.Dob.toString() + "', '" + this.Gender + "', " + this.Age + ", '" + this.Email + "'";
+		String str="'"+this.getLastname()+ "', '" + this.getMrn();
+		//last name and mrn
 		return str;
 		//'shashi','2011-03-12' , 'male', 22, 'shashiranjansiso@gmail.com'
 		
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getMrn() {
+		return mrn;
+	}
+	public void setMrn(String mrn) {
+		this.mrn = mrn;
 	}
 	
 }

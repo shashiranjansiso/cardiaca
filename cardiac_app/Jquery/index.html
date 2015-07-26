@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script type="text/javascript" src="/Users/shashi/Downloads/jqwidgets-ver3.8.0/jqwidgets/jqxdropdownlist.js"></script>  
+<script type="text/javascript" src="jqwidgets-ver3.8.0/jqwidgets/jqxdropdownlist.js"></script>  
  <link rel="stylesheet" href="jqwidgets-ver3.8.0/jqwidgets/styles/jqx.base.css" type="text/css" />
 <script type="text/javascript" src="jqwidgets-ver3.8.0/scripts/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="jqwidgets-ver3.8.0/scripts/demos.js"></script>
@@ -49,16 +49,16 @@
   <div data-role="main" class="ui-content">
    <!-- <form method="post" action="demoform.asp"> -->
       <div class="ui-field-contain">
-        <label for="name">Name:</label>
-        <input type="text" name="fullname" id="fullname">       
-        <label for="bday">Date of Birth:</label>
+        <label for="name">Lastname:</label>
+        <input type="text" name="lastname" id="lastname">       
+       <!-- <label for="bday">Date of Birth:</label>
         <input type="date" name="bday" id="bday">
         <label for="gender">Gender:</label>
         <input type="text" name="gender" id="gender"> 
         <label for="age">Age:</label>
-        <input type="text" name="age" id="age">    
+        <input type="text" name="age" id="age">  -->  
         <label for="mrn">MRN:</label>
-        <input type="email" name="email" id="email" placeholder="Your MRN..">
+        <input type="text" name="mrn" id="mrn">
       </div>
       <input type="submit" data-inline="true" value="Submit" onclick="createRequest(true)">
       <!--<button href="#cardiac_data" style="width:10%;">Submit</button-->
@@ -106,7 +106,7 @@
   <div data-role="header">
     <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
          <h1>New Patient</h1>
-    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left">Search</a>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left" onclick="send_cardiac_data()">Submit</a>
   </div>
 
   <div style="overflow: auto;">
@@ -122,7 +122,7 @@
   <div class="hr" style="margin-top:70px;"><hr /></div>
     <div style="margin-top:30px; margin-bottom:30px;">
       <label style="float:left; font-size:140%;"><span style="color:red; font-weight:bold;">Cardiac Arrest Information</span></label>
-      <label for="code" id="code" style="margin-left:1350px;">CODE: 0</label>
+      <label for="code" id="code" style="margin-left:1050px;">CODE: 0</label>
     </div>
    
    <table id="mytable_head" class="ui-widget" cellpadding="0" cellspacing="0" style="margin-left:1%; margin-right:1%;">
@@ -130,11 +130,11 @@
             <tr style="color:white; background-color:rgb(69, 91, 202);">
               <th>Time</th>
               <th style="width:9%;">CPR</th>
-              <th>P.C</th>
+              <!--<th>P.C</th>-->
               <th style="width:8.75%;">Rhythm</th>
               <th style="width:21.35%;">Monitoring</th>
               <th style="width:21.85%;">Intervention</th>
-              <th style="width:5%;">  Epi. </th>
+              <!--<th style="width:5%;">  Epi. </th>-->
               <th style="width:20.44%;">Bolus</th>
               <th style="width:52%;">Infusion</th>
             </tr>
@@ -284,22 +284,10 @@
         </tbody>
        </table> 
 
-      <div data-role="controlgroup" id="cardiac_data_row" data-type="vertical" style="height:370px; overflow-y:scroll; margin-top:-1px;" class="table-container">
+      <div data-role="controlgroup" id="cardiac_data_row" data-type="vertical" style="height:250px; overflow-y:hidden; margin-top:-1px;" class="table-container">
          
         <table id="mytable" class="ui-widget" cellpadding="0" cellspacing="0" style="margin-left:1%; margin-right:1%;">
-          <!--<thead class="ui-widget-header">
-            <tr style="color:white; background-color:rgb(69, 91, 202);">
-              <th>Time</th>
-              <th>CPR</th>
-              <th>P.C</th>
-              <th>Rhythm</th>
-              <th>Monitoring</th>
-              <th>Intervention</th>
-              <th>  Epi. </th>
-              <th>Bolus</th>
-              <th>Infusion</th>
-            </tr>
-          </thead>-->
+         
         <tbody class="ui-widget-content" id="table_body">
           <!-- first row -->
         <tr class="ca_row" id="ca_row1">
@@ -317,12 +305,6 @@
                 </select>
              </div>
             </td>
-            
-           
-            <td  style="width:3%;">
-            <input type="checkbox" id="check1" >
-          </td>
-
           <td id = "plus_td">
             <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
@@ -391,9 +373,9 @@
               </div>
             </div>
             </td>
-            <td style="width:5%;"  >
+            <!--<td style="width:5%;"  >
                 <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
-            </td>
+            </td>-->
             <td>
             <div class="parent_fill">
               <div class="child_select block_align select_class" style="width:65%;">
@@ -482,11 +464,11 @@
               </div>
             </td>
             
-           
+           <!--
             <td style="width:3%;">
             <input type="checkbox" id="check1" >
           </td>
-
+          -->
           <td id = "plus_td">
             <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
@@ -555,9 +537,9 @@
               </div>
             </div>
             </td>
-            <td style="width:5%;"  >
+            <!--<td style="width:5%;"  >
                 <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
-            </td>
+            </td>-->
             <td>
               <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">
@@ -644,11 +626,11 @@
               </div>
             </td>
             
-           
+           <!--
            <td  style="width:3%;">
             <input type="checkbox" id="check1">
           </td>
-
+          -->
           <td id = "plus_td">
             <div class="parent_fill" style="width:100px;">
                 <div class="child_select block_align">  
@@ -718,9 +700,9 @@
               </div>
             </div>
             </td>
-            <td style="width:5%;"  >
+           <!-- <td style="width:5%;"  >
                 <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
-            </td>
+            </td>-->
             <td>
                <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">
@@ -805,11 +787,11 @@
                 </select>
               </div>
             </td>
-            
+            <!--
             <td  style="width:3%;">
             <input type="checkbox" id="check1">
           </td>
-
+          -->
       
          <td id ="plus_td">
             <div class="parent_fill" style="width:100px;">
@@ -881,9 +863,9 @@
             </div>
             </td>
 
-            <td>
+            <!--<td>
                 <input type="text" name="EPINOPHRINE" id="EPINOPHRINE"> 
-            </td>
+            </td>-->
             <td>
                <div class="parent_fill">
               <div class="child_select block_align select_class"  style="width:65%;">

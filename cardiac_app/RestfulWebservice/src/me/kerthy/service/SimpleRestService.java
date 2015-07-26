@@ -20,8 +20,10 @@ import org.restlet.resource.ServerResource;
 import org.restlet.representation.Representation;
 import org.apache.log4j.Logger;
 
+import com.kerthy.parser.CardiacData;
 import com.kerthy.parser.Parser;
 import com.kerthy.parser.Patient;
+import com.kerthy.parser.Patient_2;
 import com.kerthy.sqlite.SQLiteJDBC;
 
 public class SimpleRestService extends ServerResource {
@@ -52,20 +54,31 @@ public class SimpleRestService extends ServerResource {
 
 	@Post
 	public String postSomething(Representation entity) {
-
-		String request;
+		System.out.println("start");
+		String request,info;
 		
 		Form form = new Form(entity);
 		request = form.getValues("request");
-		Patient pt = Parser.parse(request);
-		SQLiteJDBC sqliteInstance = SQLiteJDBC.getInstance();
-		sqliteInstance.insertInTable(pt);
-		String str = sqliteInstance.readFromdb("shashi.ranjan@stonybrook.edu");
-		if (logger.isDebugEnabled()) {
-			logger.debug("Start postSomething");
-			logger.debug("data: '" + request + "'");
-		}
 		
+		info=form.getValues("info");
+		System.out.println("is equal to code data? "+info.equals("code_data"));
+		if("patient".equals(info)){
+			Patient_2 pt = Parser.parseInput(request);
+			SQLiteJDBC sqliteInstance = SQLiteJDBC.getInstance();
+			//sqliteInstance.insertInTable(pt);
+			//String str = sqliteInstance.readFromdb("shashi.ranjan@stonybrook.edu");
+			if (logger.isDebugEnabled()) {
+				logger.debug("Start postSomething");
+				logger.debug("data: '" + request + "'");
+			}	
+		}else if("code_data".equals(info)){
+			CardiacData[] cd =(CardiacData[]) Parser.parseData(request);
+			SQLiteJDBC sqliteInstance = SQLiteJDBC.getInstance();
+			sqliteInstance.insertInTable(cd);
+			
+			System.out.println("after");
+			//Parser.input(request);
+		}
 		String result = null;
 		result = "Response from Restlet Webservice : " + request;
 
@@ -75,7 +88,13 @@ public class SimpleRestService extends ServerResource {
 		}
 		return result;
 	}
-
+	
+	/*@Post
+	public String postCardiacInfo(Representation entity){
+		System.out.println("cardiac post");
+		return "test";
+	}
+*/
 	@Put
 	public String putSomething(Representation entity) {
 		
