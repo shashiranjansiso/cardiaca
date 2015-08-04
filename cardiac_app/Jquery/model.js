@@ -50,7 +50,7 @@ function createRequest(flag_v)
 
 function send_cardiac_data()
 {
-    var mrn=sessionStorage.getItem("patientId"); 
+    var mrn=sessionStorage.getItem("patientId");
     var cardiacData=[];
 
     var _table = document.getElementById('mytable');
@@ -88,7 +88,7 @@ function send_cardiac_data()
         var monitoring_td = tr.children[3];
         var monitoring_key = monitoring_td.children[0].children[0].children[0].children[0].children[1].value;
         patient_data["monitoring_key"] = monitoring_key;
-        
+
         var monitoring_value = monitoring_td.children[0].children[1].children[0].children[0].innerHTML;
         patient_data["monitoring_value"] = monitoring_value;
 
@@ -138,7 +138,7 @@ function getPatientInformation()
 {
   var myObj = {};
   var name = document.getElementById("patient_search").value;
-  
+
   var request = "request=";
   request = request.concat(name);
   $.get(
@@ -156,9 +156,39 @@ function getPatientInformation()
   document.getElementById("age").innerHTML = obj.Age;
   document.getElementById("email").innerHTML = obj.Email;*/
   //alert(json);
-  
-}
 
+}
+function epi_click(evt){
+  //alert('hi');
+  var count = 0;
+  var min = 0;
+  var sec = 0;
+  var flag = false;
+    var timer = $.timer(
+      function() {
+        count++;
+        sec++;
+        if(count%60 == 0)  //1 min
+        {
+          min++;
+          flag = true;
+          sec = 0;
+        }
+        evt.innerHTML = 'EPI:' + min + ":" + count%60;
+        var sec2=count%60;
+        if(min%1==0 && sec2<=15 && sec2%2==0){
+        //every 4 minutes,
+          evt.style.backgroundColor='red';
+        }else{
+          evt.style.backgroundColor='white';
+        }
+        if(flag == false)
+          return;
+      },
+      1000,
+      true
+    );
+  }
 function startTimer()
 {
   //ca_row
@@ -173,7 +203,7 @@ function startTimer()
   var flag = false;
     var timer = $.timer(
       function() {
-        
+
         count++;
         sec++;
         //hightlight eh current row
@@ -183,24 +213,24 @@ function startTimer()
           min++;
           flag = true;
           sec = 0;
-         
+
         }
-    
+
         document.getElementById("cpr").innerHTML = 'CPR:' + min + ":" + count%60;
-        document.getElementById("epi").innerHTML = 'EPI:' + min + ":" + count%60;
+      //  document.getElementById("epi").innerHTML = 'EPI:' + min + ":" + count%60;
         document.getElementById("code").innerHTML = 'CODE:' + min + ":" + count%60;
         if(min -1 >= 0)
-            table.children[0].children[min-1].style.backgroundColor = 'white'; 
+            table.children[0].children[min-1].style.backgroundColor = 'white';
         if(min < 3)
         {
-          table.children[0].children[min].style.backgroundColor = 'red'; 
+          table.children[0].children[min].style.backgroundColor = 'red';
           return;
         }
         if(flag == false)
           return;
         //send_code_data_to_server();
         //$('.timer').html('Time Elapsed:' + count);
-        
+
        // var element = document.getElementById("mytable");
         //element.id = "someID";
         //element.append($("#table_body"));
@@ -231,7 +261,7 @@ function startTimer()
       },
       1000,
       true
-    );  
+    );
 }
 
 var my_node = 0;
@@ -246,7 +276,7 @@ function onclick_handler(el)
     {
       var elements = document.getElementById("ca_row_hidden");
       if(my_node == 0)
-      { 
+      {
         my_node = elements.children[3];
         //alert(el.parentElement.parentElement.innerHTML);
           //el.parentElement.parentElement.parentElement.innerHTML = el.parentElement.parentElement.parentElement.innerHTML + '<div class="parent_fill"> <div class="child_select block_align"> <select name="Pulse" id="Pulse" > <option selected="selected">Select</option> <option >Pea</option> <option>Asystole</option></select></div> <div class="portrait" id = "add_new" onclick="onclick_handler(this);" <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png"> </div>';
@@ -284,7 +314,7 @@ function onclick_handler(el)
     {
        var elements = document.getElementById("ca_row_hidden");
        if(monitoring_node == 0)
-        { 
+        {
            monitoring_node = elements.children[3];  //monitoring
         //alert(el.parentElement.parentElement.innerHTML);
           //el.parentElement.parentElement.parentElement.innerHTML = el.parentElement.parentElement.parentElement.innerHTML + '<div class="parent_fill"> <div class="child_select block_align"> <select name="Pulse" id="Pulse" > <option selected="selected">Select</option> <option >Pea</option> <option>Asystole</option></select></div> <div class="portrait" id = "add_new" onclick="onclick_handler(this);" <img src="/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png"> </div>';
@@ -306,7 +336,7 @@ function onclick_handler(el)
       {
           var elements = document.getElementById("ca_row_hidden");
            if(intervention_node == 0)
-            { 
+            {
                intervention_node = elements.children[4];  //intervention
                 var n = intervention_node.children[0];
             }
@@ -336,7 +366,7 @@ function handle_select_change(el)
 
   if(el.id == 'Intervention')
   {
-     
+
     if(el.value == 'Defrib')
     {
       el.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[0].disabled=false;
@@ -346,7 +376,7 @@ function handle_select_change(el)
        //add text
       //el.parentElement.parentElement.parentElement.parentElement.children[1].innerHTML+='<input type="text"  name="monitoring" id="monitoring">';
     }
-       
+
     else if(el.value == 'Airway')
     {
      el.parentElement.parentElement.parentElement.parentElement.children[2].className = "text_class";
@@ -359,7 +389,7 @@ function handle_select_change(el)
       el.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[0].disabled=true;
       el.parentElement.parentElement.parentElement.parentElement.children[1].className = "text_class";
       el.parentElement.parentElement.parentElement.parentElement.children[2].className = "text_class hidden";
-      //remove 
+      //remove
     // el.parentElement.style.width='0%';
    }
 
@@ -375,7 +405,7 @@ function handle_select_change(el)
       else
       {
         el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[0].children[1].options[3].disabled = false;
-      
+
       }
   }
   //else
@@ -399,7 +429,7 @@ function nodeToString (node) {
    tmpNode.appendChild(node.cloneNode(true));
    var node = tmpNode.children[0];
    //tmpNode.children[0].children[3].children[0].children[1].children[0].src = '/Users/shashi/Desktop/shashi/course_material/advance_project/Jquery/plus.png';
-   
+
    //tmpNode.children[0].children[3].children[0].children[1].id = 'add_new';
    node.removeAttribute("class");
 
@@ -421,7 +451,7 @@ function toggle_handler(node)
       //add active class to node
       node.className += ' active';
       node.style.backgroundColor = "rgb(151, 216, 156)";
-    } 
+    }
     else
     {
       //remove active class from node
@@ -432,40 +462,40 @@ function toggle_handler(node)
     /*node.toggleClass('active');*/
 }
 
-function load_jqxdropdown(){          
+function load_jqxdropdown(){
       var url = "sampledata/customers.json";
       // prepare the data
       var data = [
-              { 
-                  "medName": "Norepinephrine", 
+              {
+                  "medName": "Norepinephrine",
                   "value": "67"
               },
-              { 
-                  "medName": "Magnesium", 
+              {
+                  "medName": "Magnesium",
                   "value": "67"
               },
-               { 
-                  "medName": "Amiodarone", 
+               {
+                  "medName": "Amiodarone",
                   "value": "67"
               },
-              { 
-                  "medName": "Atropine", 
+              {
+                  "medName": "Atropine",
                   "value": "67"
               },
-               { 
-                  "medName": "D50W", 
+               {
+                  "medName": "D50W",
                   "value": "67"
               },
-              { 
-                  "medName": "D10W", 
+              {
+                  "medName": "D10W",
                   "value": "67"
               },
-              { 
-                  "medName": "Sodium Bicarb", 
+              {
+                  "medName": "Sodium Bicarb",
                   "value": "67"
               },
-              { 
-                  "medName": "Lido", 
+              {
+                  "medName": "Lido",
                   "value": "67"
               },
                   ];
@@ -498,9 +528,9 @@ function load_jqxdropdown(){
       // Create a jqxDropDownList
       $(".jqxWidget").jqxDropDownList({ checkboxes: true, source: dataAdapter, displayMember: "medName", valueMember: "value", width: 170, height: 40});
       $(".jqxWidget").jqxDropDownList('checkIndex', 0);
-      
+
       // subscribe to the checkChange event.
-    
+
      /* $("#jqxWidget").on('checkChange', function (event) {
           if (event.args) {
               var item = event.args.item;
@@ -520,7 +550,7 @@ function load_jqxdropdown(){
                   var items = $("#jqxWidget").jqxDropDownList('getCheckedItems');
                   var checkedItems = "";
                   $.each(items, function (index) {
-                      checkedItems += this.label + ", ";                          
+                      checkedItems += this.label + ", ";
                   });
                   $("#checkedItemsLog").text(checkedItems);
               }
