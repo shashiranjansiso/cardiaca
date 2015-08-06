@@ -16,7 +16,7 @@ import com.kerthy.parser.Patient;
 
 public class SQLiteJDBC
 {
-	private static String dbfile = "/home/harsha/Dropbox/Summer15/cardiaca/cardiac_app/RestfulWebservice/database/test.db";
+	private static String dbfile = "./database/test.db";
 	private static final Logger logger = Logger.getLogger(SQLiteJDBC.class);
 
  /* public static void main( String args[] )
