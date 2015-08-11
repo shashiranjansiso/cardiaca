@@ -48,7 +48,7 @@
 img{
 	max-width: 100%;
 	max-height: 100%;
-	
+
 }
 
 div.hr {
@@ -59,7 +59,7 @@ div.hr {
 
 table, th, td {
     border: 1px solid black;
-    
+
 }
 
 td
@@ -86,7 +86,7 @@ th
 	/*width: 80%;*/
 	height: 100%;
 	margin-top: 5px;
-	
+
 }
 
 .child_image
@@ -97,7 +97,7 @@ th
 
 .infusion_div
 {
-	widht:90px;
+	width:90px;
 	float:left;
 }
 
@@ -115,7 +115,7 @@ th
 .dropdown dd {
     position:relative;
 }
-.dropdown a, 
+.dropdown a,
 .dropdown a:visited {
     color:#fff;
     text-decoration:none;

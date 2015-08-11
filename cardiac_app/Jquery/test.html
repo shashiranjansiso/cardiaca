@@ -13,44 +13,48 @@
     <script type="text/javascript" src="jqwidgets-ver3.8.0/jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="jqwidgets-ver3.8.0/jqwidgets/jqxdropdownlist.js"></script>
     <script type="text/javascript" src="jqwidgets-ver3.8.0/jqwidgets/jqxcheckbox.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="test.js"></script>
+
 </head>
 <body>
     <div id='content'>
         <script type="text/javascript">
-            $(document).ready(function () {           
+            $(document).ready(function () {
                 var url = "sampledata/customers.json";
                 // prepare the data
                 var data = [
-                        { 
-                            "medName": "Norepinephrine", 
+                        {
+                            "medName": "Norepinephrine",
                             "value": "67"
                         },
-                        { 
-                            "medName": "Magnesium", 
+                        {
+                            "medName": "Magnesium",
                             "value": "67"
                         },
-                         { 
-                            "medName": "Amiodarone", 
+                         {
+                            "medName": "Amiodarone",
                             "value": "67"
                         },
-                        { 
-                            "medName": "Atropine", 
+                        {
+                            "medName": "Atropine",
                             "value": "67"
                         },
-                         { 
-                            "medName": "D50W", 
+                         {
+                            "medName": "D50W",
                             "value": "67"
                         },
-                        { 
-                            "medName": "D10W", 
+                        {
+                            "medName": "D10W",
                             "value": "67"
                         },
-                        { 
-                            "medName": "Sodium Bicarb", 
+                        {
+                            "medName": "Sodium Bicarb",
                             "value": "67"
                         },
-                        { 
-                            "medName": "Lido", 
+                        {
+                            "medName": "Lido",
                             "value": "67"
                         },
                             ];
@@ -103,7 +107,7 @@
                             var items = $("#jqxWidget").jqxDropDownList('getCheckedItems');
                             var checkedItems = "";
                             $.each(items, function (index) {
-                                checkedItems += this.label + ", ";                          
+                                checkedItems += this.label + ", ";
                             });
                             $("#checkedItemsLog").text(checkedItems);
                         }
@@ -118,8 +122,47 @@
                 <div id="selectionlog"></div>
                 <div style='max-width: 300px; margin-top: 20px;' id="checkedItemsLog"></div>
             </div>-->
-          
+
         </div>
+        <button id="abc" data-toggle="modal" data-target="#p1">click for popup</button>
+          <!-- Modal -->
+  <div id="p1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Patient Unresponsive? Check pulse. </p>
+          <input type="radio" name="pulse" value="good">Good Pulse</input>
+          <input type="radio" name="pulse" value="bad">Bad Pulse</input>
+          <p hidden style="color:red;">Select one of the two values. </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="clickForPulse(this);">OK</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <script type="text/javascript">
+          var x;
+          $('#p1').on('hide.bs.modal', function (e) {
+            console.log('settign interval');
+            x=setInterval(showModalp1,2000);
+          });
+            $('#p1').on('show.bs.modal', function (e) {
+              console.log('clearing interval');
+              clearInterval(x);
+            });
+          function showModalp1(){
+            $('#p1').modal('show');
+          }
+          </script>
+        </div>
+      </div>
+
+    </div>
+  </div>
     </div>
 </body>
 </html>
