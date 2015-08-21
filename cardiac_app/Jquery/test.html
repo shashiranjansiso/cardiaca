@@ -126,7 +126,7 @@
         </div>
         <button id="abc" data-toggle="modal" data-target="#p1">click for popup</button>
           <!-- Modal -->
-  <div id="p1" class="modal fade" role="dialog">
+  <div id="p1" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -137,9 +137,9 @@
         </div>
         <div class="modal-body">
           <p>Patient Unresponsive? Check pulse. </p>
-          <input type="radio" name="pulse" value="good">Good Pulse</input>
-          <input type="radio" name="pulse" value="bad">Bad Pulse</input>
-          <p hidden style="color:red;">Select one of the two values. </p>
+          <input type="radio" name="pulse" value="good">Good Pulse</input><br/>
+          <input type="radio" name="pulse" value="bad">Very weak/slow Pulse</input>
+          <p id="err_pulse" hidden style="color:red;">Select one of the two values. </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" onclick="clickForPulse(this);">OK</button>
@@ -147,8 +147,8 @@
           <script type="text/javascript">
           var x;
           $('#p1').on('hide.bs.modal', function (e) {
-            console.log('settign interval');
-            x=setInterval(showModalp1,2000);
+            console.log('setting interval');
+            x=setInterval(showModalp1,4*10000);
           });
             $('#p1').on('show.bs.modal', function (e) {
               console.log('clearing interval');
@@ -163,6 +163,47 @@
 
     </div>
   </div>
+
+
+  <!--Step 2-->
+  <!-- Modal -->
+<div id="compressions" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">Modal Header</h4>
+</div>
+<div class="modal-body">
+  <p>Compressions Started?</p>
+  <input type="radio" name="compressions" value="now" >Now</input><br/>
+  <input type="radio" name="compressions" value="abort" onclick="compressionsChangeListener(this)" >CPR aborted</input></br>
+  <input type="text" style="visibility:hidden;" id="reason" />
+  <p hidden id="err" style="color:red;">Select one of the two values. </p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" onclick="clickForPulse(this);">OK</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <script type="text/javascript">
+/*  var x;
+  $('#p1').on('hide.bs.modal', function (e) {
+    console.log('settign interval');
+    x=setInterval(showModalp1,2000);
+  });
+    $('#p1').on('show.bs.modal', function (e) {
+      console.log('clearing interval');
+      clearInterval(x);
+    });
+  function showModalp1(){
+    $('#p1').modal('show');
+  }*/
+  </script>
+</div>
+</div>
+
+</div>
+</div>
     </div>
 </body>
 </html>
